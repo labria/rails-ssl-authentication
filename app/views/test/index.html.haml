@@ -3,3 +3,5 @@ Email:
 %br/
 Name:
 = @info['CN']
+- if logged_in?
+  = current_user.id

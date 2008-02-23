@@ -3,6 +3,16 @@ class SessionsController < ApplicationController
 
   # render new.rhtml
   def new
+    if request.env["HTTP_X_SSL_CLIENT_S_DN"]
+      pairs = request.env["HTTP_X_SSL_CLIENT_S_DN"].split("/").
+        delete_if{ |x| x == ""}.map{|p| p.split("=")}.flatten
+      @info = Hash.[](*pairs)
+      if user = User.find_by_login_and_email(@info["CN"], @info["emailAddress"])
+        self.current_user = user
+        flash[:notice] = "Logged in via cert successfully"
+        redirect_back_or_default('/test/')
+      end
+    end
   end
 
   def create
