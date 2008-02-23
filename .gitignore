@@ -4,6 +4,7 @@ tmp/**/*
 public/cache/**/*
 doc/api
 doc/app
+config/database.yml
 db/development.sqlite3
 db/schema.rb
 config/deploy.rb
