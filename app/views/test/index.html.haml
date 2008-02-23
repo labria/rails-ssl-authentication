@@ -5,3 +5,4 @@ Name:
 = @info['CN']
 - if logged_in?
   = current_user.id
+  = link_to "logout",session_path, :method => "delete"
