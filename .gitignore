@@ -4,3 +4,5 @@ tmp/**/*
 public/cache/**/*
 doc/api
 doc/app
+db/development.sqlite3
+db/schema.rb
