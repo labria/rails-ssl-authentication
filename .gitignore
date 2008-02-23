@@ -6,3 +6,4 @@ doc/api
 doc/app
 db/development.sqlite3
 db/schema.rb
+config/deploy.rb
