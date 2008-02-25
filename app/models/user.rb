@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   validates_length_of       :email,    :within => 3..100
   validates_uniqueness_of   :login, :email, :case_sensitive => false
   before_save :encrypt_password
-  
+  after_create :create_cert
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
   attr_accessible :login, :email, :password, :password_confirmation
@@ -74,5 +74,15 @@ class User < ActiveRecord::Base
       crypted_password.blank? || !password.blank?
     end
     
+    # Create a certificate for the user
+    def create_cert
+      conf = {
+       :type => 'client',
+       :user => login,
+       :email => email,
+      }
+      qc = QuickCert.new CA
+      qc.create_cert conf
+    end
     
 end

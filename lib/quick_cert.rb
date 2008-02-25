@@ -142,8 +142,9 @@ class QuickCert
 
   def create_key(cert_config)
     passwd_cb = nil
-    dest = cert_config[:hostname] || cert_config[:user]
-    keypair_file = File.join dest, (dest + "_keypair.pem")
+    file_name = cert_config[:hostname] || cert_config[:user]
+    dest = "#{RAILS_ROOT}/cert/" + file_name
+    keypair_file = File.join dest, (file_name + "_keypair.pem")
     Dir.mkdir dest, 0700
 
     puts "Generating RSA keypair" if $DEBUG
@@ -174,8 +175,9 @@ class QuickCert
 
   def create_csr(cert_config, keypair_file = nil)
     keypair = nil
-    dest = cert_config[:hostname] || cert_config[:user]
-    csr_file = File.join dest, "csr_#{dest}.pem"
+    file_name = cert_config[:hostname] || cert_config[:user]
+    dest = "#{RAILS_ROOT}/cert/" + file_name
+    csr_file = File.join dest, "csr_#{file_name}.pem"
 
     name = @ca_config[:name].dup 
     case cert_config[:type]
@@ -326,8 +328,9 @@ class QuickCert
     end
 
     # Write cert
-    dest = cert_config[:hostname] || cert_config[:user]
-    cert_file = File.join dest, "cert_#{dest}.pem"
+    file_name = cert_config[:hostname] || cert_config[:user]
+    dest = "#{RAILS_ROOT}/cert/" + file_name
+    cert_file = File.join dest, "cert_#{file_name}.pem"
     puts "Writing cert to #{cert_file}" if $DEBUG
     File.open cert_file, "w", 0644 do |f|
       f << cert.to_pem

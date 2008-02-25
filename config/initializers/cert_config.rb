@@ -6,15 +6,15 @@ hostname = full_hostname.split('.')[0]
 
 CA[:hostname] = hostname
 CA[:domainname] = domainname
-CA[:CA_dir] = File.join Dir.pwd, "cert/CA"
+CA[:CA_dir] = "#{RAILS_ROOT}/cert/CA"
 CA[:password] = '1234'
 
-CA[:keypair_file] ||= File.join CA[:CA_dir], "private/cakeypair.pem"
-CA[:cert_file] ||= File.join CA[:CA_dir], "cacert.pem"
-CA[:serial_file] ||= File.join CA[:CA_dir], "serial"
-CA[:new_certs_dir] ||= File.join CA[:CA_dir], "newcerts"
-CA[:new_keypair_dir] ||= File.join CA[:CA_dir], "private/keypair_backup"
-CA[:crl_dir] ||= File.join CA[:CA_dir], "crl"
+CA[:keypair_file] = File.join CA[:CA_dir], "private/cakeypair.pem"
+CA[:cert_file] = File.join CA[:CA_dir], "cacert.pem"
+CA[:serial_file] = File.join CA[:CA_dir], "serial"
+CA[:new_certs_dir] = File.join CA[:CA_dir], "newcerts"
+CA[:new_keypair_dir] = File.join CA[:CA_dir], "private/keypair_backup"
+CA[:crl_dir] = File.join CA[:CA_dir], "crl"
 
 CA[:ca_cert_days] ||= 5 * 365 # five years
 CA[:ca_rsa_key_length] ||= 2048
