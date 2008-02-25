@@ -27,7 +27,7 @@ class UsersController < ApplicationController
       pkey = OpenSSL::PKey::RSA.new(File. read("cert/#{current_user.login}/#{current_user.login}_keypair.pem"))
       cert = OpenSSL::X509::Certificate.new(File.read("cert/#{current_user.login}/cert_#{current_user.login}.pem"))
       p12 = OpenSSL::PKCS12.create(nil, "#{current_user.login} cert", pkey, cert)
-      send_data p12.to_der, :type => 'application/x-pkcs12', :filename => "#{current_user.login}.p12"
+      send_data p12.to_der, :type => 'application/pkcs12', :filename => "#{current_user.login}.p12"
     end
   end
 end
