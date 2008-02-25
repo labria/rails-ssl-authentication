@@ -1,8 +1,16 @@
-Email: 
-= @info['emailAddress']
-%br/
-Name:
-= @info['CN']
-- if logged_in?
-  = current_user.id
-  = link_to "logout",session_path, :method => "delete"
+#top
+  Well, this is nothing but a test page.
+  If you can access it with https, it means you have a certificate installed. If not, just go on and try!
+  = link_to "Register", new_user_path()
+#content
+  - if logged_in?
+    Now that you're logged in, you can get a client certificate here:
+    = link_to "get certificate", get_cert_users_path()
+    %br
+    After you have it installed, you can 
+    = link_to "log out",session_path, :method => "delete"
+    , and then just go to
+    = link_to "https://ssltest.startika.com/session/new", "https://ssltest.startika.com/session/new"
+    and you should automatically login to the site using your certificate.
+  - else
+    No, you really should register if you want some magic =)
