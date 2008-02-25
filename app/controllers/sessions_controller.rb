@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
       if user = User.find_by_login_and_email(@info["CN"], @info["emailAddress"])
         self.current_user = user
         flash[:notice] = "Logged in via cert successfully"
-        redirect_back_or_default('/test/')
+        redirect_to :controller => 'test', :action => 'cert_login'
       end
     end
   end
